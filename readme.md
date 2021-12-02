@@ -32,6 +32,28 @@ From the terminal in visual code ,run the following command:
 
 ```git pull orgin main ```
 
+## Validation step ##
+
+To verify if git has been installed:
+```git version  ```
+
+To verify node js
+
+``` $node -v ```
+
+## using your own repo ##
+ Create a repository in github 
+
+ git clone the folder
+  
+   to amend the changes run the below commands:
+
+   ``` git add <file name>```
+   ``` git commit -m <your comment > ```
+   ``` git push origin main ```
+
+
+
 
 
 
