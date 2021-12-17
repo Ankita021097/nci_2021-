@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/Ankita021097/nci_2021-#readme",
   "dependencies": {
-    "web3": "^1.6.0"
+    "web3": "^1.6.1"
   }
 }

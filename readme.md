@@ -52,6 +52,16 @@ To verify node js
    ``` git commit -m <your comment > ```
    ``` git push origin main ```
 
+   ## to execute .js file  ##
+    To execute Node js  run the following command 
+   ``` node <file name > ```
+
+   ## Dependencies and NPM ##
+
+    To use large chunks of code other have written to interact with Etherum 
+
+
+
 
 
 
