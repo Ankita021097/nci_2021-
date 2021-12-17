@@ -9,7 +9,12 @@ console.log("connected to web3");
 
 //added abi interface from the contract 
 
-const abi =[
+const abi = [
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
 	{
 		"anonymous": false,
 		"inputs": [
@@ -59,6 +64,19 @@ const abi =[
 		],
 		"name": "Transfer",
 		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "_totalSupply",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -122,6 +140,58 @@ const abi =[
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "decimals",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "name",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "symbol",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "tokenOwner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -205,12 +275,18 @@ console.log("connected to contract on ropsten")
 // run come of the methods in the contract
 
 const getTotalSupply = async() => {
-	let totSupply = await contract.methods.totalSupply().call()
+	let totSupply = await contract.methods.totalSupply().call();
 	return "total supply is:" + totSupply;
 }
 
+const getSymbol = async() => {
+	let symbol = await contract.methods.symbol().call();
+	return "symbol is:" + symbol;
+}
+
 const returnAllValues = async() => {
-	console.log(await getTotalSupply())
+	console.log(await getTotalSupply());
+	console.log(await getSymbol());
 }
 
 returnAllValues()
