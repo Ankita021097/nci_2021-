@@ -202,7 +202,16 @@ const owner = "0x7Dff468a247f3d635eCf2202871E2EB44B29154E";
 const contract = new web3.eth.Contract(abi, address);
 console.log("connected to contract on ropsten")
 
+// run come of the methods in the contract
 
+const getTotalSupply = async() => {
+	let totSupply = await contract.methods.totalSupply().call()
+	return "total supply is:" + totSupply;
+}
 
+const returnAllValues = async() => {
+	console.log(await getTotalSupply())
+}
 
+returnAllValues()
 //console.log ("hello world?");
