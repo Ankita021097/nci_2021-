@@ -10,6 +10,7 @@ contractAddress = process.env.CONTRACT_ADDRESS
 ownerAddress = process.env.OWNER_ADDRESS
 privateKey = Buffer.from(process.env.SUPER_SECRET_PRIVATE_KEY, 'hex')
 
+// get the ABI (interface) for our contract
 const abi = [
 	{
 		"anonymous": false,
@@ -210,7 +211,7 @@ const sendTx = async(raw) => {
     return await web3.eth.sendSignedTransaction(raw);
 }
 
-const transferToken = async(toAccount, amount) => {
+const transferETH = async(toAccount, amount) => {
 
     // generate a nonce
     let txCount = await web3.eth.getTransactionCount(owner);
@@ -219,10 +220,11 @@ const transferToken = async(toAccount, amount) => {
     // generate tx data
     const txObject = {
         nonce: web3.utils.toHex(txCount),
-        gasLimit: web3.utils.toHex(500000),
+        gasLimit: web3.utils.toHex(21000),
         gasPrice: web3.utils.toHex(web3.utils.toWei('100', 'gwei')),
-        to: contractAddress,
-        data: contract.methods.transfer(toAccount, amount).encodeABI()
+        to: toAccount,
+        //data: contract.methods.transfer(toAccount, amount).encodeABI()
+        value: web3.utils.toHex(web3.utils.toWei(amount, 'ether'))
     }
 
     // assign a chain id (ropsten: 3)
@@ -245,8 +247,4 @@ const transferToken = async(toAccount, amount) => {
     console.log("transaction in block: " + txResponse.blockNumber)
 }
 
-module.exports = { transferToken }
-//transferToken("0xFbC8857d46223C39C48BA844c5AB0159EA3B8692", 123000000)
-
-
-
+transferETH("0x4d60E7f9d4901816981a0E4c6D95F394159C6371", "0.25")
