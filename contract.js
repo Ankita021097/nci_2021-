@@ -1,9 +1,19 @@
 // file to read the contract interactions
 
+//loads the web3 dependency 
+
 const Web3= require("web3")
 
+//setsup my env file
+require('dotenv').config()
+
+//loads the enviornment variables
+infuraToken = process.env.INFURA_TOKEN 
+contractAddress = process.env.CONTRACT_ADDRESS
+ownerAddress = process.env.OWNER_ADDRESS
+
 //instantiate web3
-const rpcURL = "https://ropsten.infura.io/v3/05d048bb0cc94d88ae05a60b889b548b";
+const rpcURL = "https://ropsten.infura.io/v3/" + infuraToken;
 const web3=new Web3(rpcURL);
 console.log("connected to web3");
 
@@ -267,8 +277,10 @@ const abi = [
 
 //get the contract address
 
-const address = "0xca28d3f2b9299d96da0e57ffc1dc8c8a35af30c5";
-const owner = "0x7Dff468a247f3d635eCf2202871E2EB44B29154E";
+const address = contractAddress;
+const owner = ownerAddress;
+
+// connect to the contract
 const contract = new web3.eth.Contract(abi, address);
 console.log("connected to contract on ropsten")
 
@@ -276,7 +288,7 @@ console.log("connected to contract on ropsten")
 
 const getBalanceOfOwner = async(owner) => {
 	let bal = await contract.methods.balanceOf(owner).call();
-	return "balance of owner: " + bal;
+	return  bal;
 }
 
 const getTotalSupply = async() => {
@@ -301,5 +313,7 @@ const returnAllValues = async() => {
 	console.log(await getDecimals(owner));
 }
 
-returnAllValues()
+module.exports = { getSymbol, getDecimals, getBalanceOfOwner }
+
+//returnAllValues()
 //console.log ("hello world?");
